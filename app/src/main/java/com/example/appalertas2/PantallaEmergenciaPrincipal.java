@@ -33,7 +33,7 @@ import java.util.TimerTask;
 public class PantallaEmergenciaPrincipal extends AppCompatActivity {
     ImageButton btnEmergenciaPrincipal, btnMiPerfilPrincipal;
     static String telefono_contacto;
-
+    String ID_USUARIO;
 
 
     @Override
@@ -41,7 +41,13 @@ public class PantallaEmergenciaPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_emergencia_principal);
         conectar();
-        //recibirTelefonoContacto();
+
+        Bundle b = getIntent().getExtras();
+        if (b != null){
+            ID_USUARIO = b.getString("Id");
+        }
+
+
         btnMiPerfilPrincipal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,12 +65,12 @@ public class PantallaEmergenciaPrincipal extends AppCompatActivity {
 
         };
 
-
+        recibirTelefonoContacto(ID_USUARIO);
         btnEmergenciaPrincipal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                enviarMensaje("3234729383","Sorry we");
+                enviarMensaje(telefono_contacto,"Sorry we");
 
             }
         });
