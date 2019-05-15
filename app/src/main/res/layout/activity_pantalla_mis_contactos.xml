@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PantallaMisContactos">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/pantalla3_2"
+        android:id="@+id/imageView1"
+        />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="198dp"
+        android:layout_height="137dp"
+        android:layout_above="@+id/lvContactos"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/btn4_4" />
+    <ListView
+        android:id="@+id/lvContactos"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+
+    </ListView>
+
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:id="@+id/btnAgregarContacto"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/lvContactos"
+        android:background="@drawable/btn1_2"        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text1"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btnAgregarContacto"
+        android:text="SI DESEA AGREGAR UN CONTACTO\n PRESIONE EL BOTÓN"/>
+
+</RelativeLayout>
