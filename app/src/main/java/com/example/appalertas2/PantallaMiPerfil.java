@@ -22,13 +22,7 @@ public class PantallaMiPerfil extends AppCompatActivity {
             ID_USUARIO = b.getString("Id");
         }
         Conectar();
-        btnMisContactos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), PantallaMisContactos.class).putExtra("Id",ID_USUARIO);
-                startActivity(i);
-            }
-        });
+
         btnDatosGrles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +61,7 @@ public class PantallaMiPerfil extends AppCompatActivity {
         btnRMiPerfil = findViewById(R.id.btnRMiPerfil);
         btnModificar = findViewById(R.id.btnModificar);
         btnAgregar = findViewById(R.id.btnAgregar);
-        btnMisContactos = (ImageButton)findViewById(R.id.btnMisContactosPrincipal);
+        //btnMisContactos = (ImageButton)findViewById(R.id.btnMisContactosPrincipal);
 
     }
 }

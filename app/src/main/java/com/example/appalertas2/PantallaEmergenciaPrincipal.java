@@ -31,7 +31,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class PantallaEmergenciaPrincipal extends AppCompatActivity {
-    ImageButton btnEmergenciaPrincipal, btnMiPerfilPrincipal;
+    ImageButton btnEmergenciaPrincipal, btnMiPerfilPrincipal, btnMisContactos;
     static String telefono_contacto;
     String ID_USUARIO;
 
@@ -47,11 +47,17 @@ public class PantallaEmergenciaPrincipal extends AppCompatActivity {
             ID_USUARIO = b.getString("Id");
         }
 
-
+        btnMisContactos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), PantallaMisContactos.class).putExtra("Id", ID_USUARIO);
+                startActivity(i);
+            }
+        });
         btnMiPerfilPrincipal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), PantallaMiPerfil.class);
+                Intent i = new Intent(getApplicationContext(), PantallaMiPerfil.class).putExtra("Id", ID_USUARIO);
                 startActivity(i);
             }
         });
@@ -139,6 +145,7 @@ public class PantallaEmergenciaPrincipal extends AppCompatActivity {
     private void conectar(){
         btnMiPerfilPrincipal = findViewById(R.id.btnMiPerfilPrincipal);
         btnEmergenciaPrincipal = findViewById(R.id.btnEmergenciaPrincipal);
+        btnMisContactos = (ImageButton)findViewById(R.id.btnMisContactosPrincipal);
 
     }
 
