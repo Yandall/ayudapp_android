@@ -31,6 +31,9 @@ public class PantallaInicial2 extends AppCompatActivity {
     ImageButton btnIng, btnMenuRegistro;
     static boolean valido = false ;
     static String validarLogin;
+
+    static String ID_USUARIO;
+    static String NOMBRE_USUARIO;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +56,11 @@ public class PantallaInicial2 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Ingrese el Email y la contraseña", Toast.LENGTH_LONG).show();
                 } else {
                     if(validarLogin.equals("101")) {
+                        Toast.makeText(getApplicationContext(), "BIENVENIDO " + NOMBRE_USUARIO, Toast.LENGTH_LONG).show();
                         Intent i = new Intent(getApplicationContext(), PantallaEmergenciaPrincipal.class);
+                        i.putExtra("Id", ID_USUARIO);
                         startActivity(i);
-                        Toast.makeText(getApplicationContext(), "Bienvenido!", Toast.LENGTH_LONG).show();
-                        valido = true;
+                        valido=true;
                     }else if(validarLogin.equals("102"))
                     {
                         Toast.makeText(getApplicationContext(), "El email y/o la contraseña son incorrectos", Toast.LENGTH_LONG).show();
