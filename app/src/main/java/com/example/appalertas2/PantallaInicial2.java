@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,10 +31,10 @@ public class PantallaInicial2 extends AppCompatActivity {
     EditText txtEmail, txtContrasena;
     ImageButton btnIng, btnMenuRegistro;
     static boolean valido = false ;
-    static String validarLogin;
-
+    String validarLogin;
     static String ID_USUARIO;
     static String NOMBRE_USUARIO;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +42,7 @@ public class PantallaInicial2 extends AppCompatActivity {
         conectar();
         valido = false;
         timer();
+
         btnMenuRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,16 +57,20 @@ public class PantallaInicial2 extends AppCompatActivity {
                 if (txtEmail.getText().toString().equals("") || txtContrasena.getText().toString().equals("")) {
                     Toast.makeText(getApplicationContext(), "Ingrese el Email y la contraseña", Toast.LENGTH_LONG).show();
                 } else {
-                    if(validarLogin.equals("101")) {
+
+                    if (validarLogin.equals("101")) {
+
                         Toast.makeText(getApplicationContext(), "BIENVENIDO " + NOMBRE_USUARIO, Toast.LENGTH_LONG).show();
                         Intent i = new Intent(getApplicationContext(), PantallaEmergenciaPrincipal.class);
                         i.putExtra("Id", ID_USUARIO);
                         startActivity(i);
                         valido=true;
-                    }else if(validarLogin.equals("102"))
-                    {
+                    } else if (validarLogin.equals("102")) {
+
                         Toast.makeText(getApplicationContext(), "El email y/o la contraseña son incorrectos", Toast.LENGTH_LONG).show();
                     }
+
+
                 }
             }
         });
@@ -78,23 +84,30 @@ public class PantallaInicial2 extends AppCompatActivity {
                                           validarUsuarioContraseña(txtEmail.getText().toString(), txtContrasena.getText().toString());
                                       }
                                   },
-                1000, 500);   // 1000 Millisecond  = 1 second
+                3000, 1000);   // 1000 Millisecond  = 1 second
         if(valido){
             timer.cancel();
         }
     }
-    private void validarUsuarioContraseña(final String email, final String contrasena){
+    public void validarUsuarioContraseña(final String email, final String contrasena){
 
 
         String URL_validarLogin = "http://labs.ebotero.com/servicios_ayudapp/public/login";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL_validarLogin,
                 new Response.Listener<String>() {
+
                     @Override
                     public void onResponse(String response) {
                         try {
 
                             JSONObject jsonobj = new JSONObject(response);
                             validarLogin = jsonobj.getString("status");
+                            if(validarLogin.equals("101")) {
+                                JSONArray list = jsonobj.optJSONArray("data");
+                                jsonobj = list.getJSONObject(0);
+                                ID_USUARIO = jsonobj.getString("Id");
+                                NOMBRE_USUARIO = jsonobj.getString("Nombre").toUpperCase();
+                            }
                         }catch (JSONException ex){
 
                         }
