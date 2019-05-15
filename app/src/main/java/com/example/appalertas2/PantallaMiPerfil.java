@@ -9,19 +9,30 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class PantallaMiPerfil extends AppCompatActivity {
-    ImageButton btnDatosGrles, btnInfoAdicional, btnRMiPerfil;
+    ImageButton btnDatosGrles, btnInfoAdicional, btnRMiPerfil, btnMisContactos;
     ImageButton btnModificar, btnAgregar;
+    String ID_USUARIO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_mi_perfil);
-
+        Bundle b = getIntent().getExtras();
+        if(b != null){
+            ID_USUARIO = b.getString("Id");
+        }
         Conectar();
+        btnMisContactos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), PantallaMisContactos.class).putExtra("Id",ID_USUARIO);
+                startActivity(i);
+            }
+        });
         btnDatosGrles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), PantallaDatosGenerales.class);
+                Intent i = new Intent(getApplicationContext(), PantallaDatosGenerales.class).putExtra("Id",ID_USUARIO);;
                 startActivity(i);
             }
         });
@@ -29,21 +40,21 @@ public class PantallaMiPerfil extends AppCompatActivity {
         btnRMiPerfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), PantallaEmergenciaPrincipal.class);
+                Intent i = new Intent(getApplicationContext(), PantallaEmergenciaPrincipal.class).putExtra("Id",ID_USUARIO);;
                 startActivity(i);
             }
         });
         btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), PantallaDatosGenerales.class);
+                Intent i = new Intent(getApplicationContext(), PantallaDatosGenerales.class).putExtra("Id",ID_USUARIO);;
                 startActivity(i);
             }
         });
         btnModificar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), PantallaDatosGenerales.class);
+                Intent i = new Intent(getApplicationContext(), PantallaDatosGenerales.class).putExtra("Id",ID_USUARIO);;
                 startActivity(i);
             }
         });
@@ -56,6 +67,7 @@ public class PantallaMiPerfil extends AppCompatActivity {
         btnRMiPerfil = findViewById(R.id.btnRMiPerfil);
         btnModificar = findViewById(R.id.btnModificar);
         btnAgregar = findViewById(R.id.btnAgregar);
+        btnMisContactos = (ImageButton)findViewById(R.id.btnMisContactosPrincipal);
 
     }
 }
