@@ -62,7 +62,7 @@ public class PantallaAgregarContacto extends AppCompatActivity {
                             String.valueOf(spnParentesco.getSelectedItemPosition()+1),String.valueOf(spnPrioridad.getSelectedItemPosition()+1),ID_USUARIO);
 
                     Toast.makeText(getApplicationContext(), "Registro Exitoso!", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(getApplicationContext(), PantallaMisContactos.class);
+                    Intent i = new Intent(getApplicationContext(), PantallaMisContactos.class).putExtra("Id",ID_USUARIO);
                     startActivity(i);
 
                 }else
