@@ -1,9 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".PantallaAgregarContacto">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pantalla6_7_8"
+        android:adjustViewBounds="true"
+        android:id="@+id/background"/>
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:id="@+id/editCelular"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:hint="Celular"/>
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="75dp"
+        android:layout_centerHorizontal="true"
+        android:hint="Nombre completo"
+        android:layout_above="@+id/editCelular"
+        android:id="@+id/editNombre"/>
+    <TextView
+        android:id="@+id/text1"
+        android:text="Seleccione tipo de parentesco"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/editCelular"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/spinnerTipoParentesco"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/text1"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:text="Seleccione tipo de prioridad"
+        android:id="@+id/text2"
+        android:layout_below="@+id/spinnerTipoParentesco"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/spinnerTipoPrioridad"
+
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/text2"/>
+
+    <TextView
+        android:text="Seleccione tipo de contacto"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/text3"
+        android:layout_below="@+id/spinnerTipoPrioridad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Spinner
+        android:id="@+id/spinnerTipoDeContacto"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/text3"/>
+    <ImageButton
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:id="@+id/btnValidar"
+        android:layout_below="@+id/spinnerTipoDeContacto"
+        android:src="@drawable/btn3_3"
+        android:layout_centerHorizontal="true"/>
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/back"
+        android:id="@+id/btnBack"
+        android:text="BACK"/>
+
+</RelativeLayout>
