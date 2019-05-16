@@ -41,7 +41,7 @@ public class PantallaAgregarContacto extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_agregar_contacto);
         conectar();
-
+        //Aca traigo el IdUsuario
         Bundle b = getIntent().getExtras();
         if (b != null) {
             ID_USUARIO=b.getString("Id");
