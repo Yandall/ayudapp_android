@@ -85,8 +85,10 @@
         android:id="@+id/imageButtonCerrarSesion"
         android:layout_width="100dp"
         android:layout_height="50dp"
-        app:srcCompat="@drawable/exitsesion"
-        android:layout_below="@+id/btnEmergenciaPrincipal"/>
+
+        android:layout_marginTop="528dp"
+        android:src="@drawable/exitsesion" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
