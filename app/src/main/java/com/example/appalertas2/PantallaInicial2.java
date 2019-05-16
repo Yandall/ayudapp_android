@@ -2,8 +2,10 @@ package com.example.appalertas2;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +29,8 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cache.Session;
+
 public class PantallaInicial2 extends AppCompatActivity {
     EditText txtEmail, txtContrasena;
     ImageButton btnIng, btnMenuRegistro;
@@ -35,6 +39,8 @@ public class PantallaInicial2 extends AppCompatActivity {
     static String ID_USUARIO;
     static String NOMBRE_USUARIO;
 
+    private Session session;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,14 +48,23 @@ public class PantallaInicial2 extends AppCompatActivity {
         conectar();
         valido = false;
         timer();
+        session = new Session(this.getApplicationContext());
+
+        if(session.getSessionIdCache() != null){
+            Log.d("AAAAAAAAAAAA", session.getSessionIdCache());
+            mainActivity();
+        }
+
+
+
 
         btnMenuRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), PantallaRegistrar1.class);
-                startActivity(i);
+                registroActivity();
             }
         });
+
         btnIng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,14 +74,11 @@ public class PantallaInicial2 extends AppCompatActivity {
                 } else {
 
                     if (validarLogin.equals("101")) {
-
                         Toast.makeText(getApplicationContext(), "BIENVENIDO " + NOMBRE_USUARIO, Toast.LENGTH_LONG).show();
-                        Intent i = new Intent(getApplicationContext(), PantallaEmergenciaPrincipal.class);
-                        i.putExtra("Id", ID_USUARIO);
-                        startActivity(i);
                         valido=true;
+                        session.saveSessionIdCache(ID_USUARIO);
+                        mainActivity();
                     } else if (validarLogin.equals("102")) {
-
                         Toast.makeText(getApplicationContext(), "El email y/o la contraseña son incorrectos", Toast.LENGTH_LONG).show();
                     }
 
@@ -74,6 +86,18 @@ public class PantallaInicial2 extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    private void registroActivity(){
+        Intent i = new Intent(getApplicationContext(), PantallaRegistrar1.class);
+        startActivity(i);
+    }
+
+    private void mainActivity(){
+        Intent i = new Intent(getApplicationContext(), PantallaEmergenciaPrincipal.class);
+        i.putExtra("Id", session.getSessionIdCache());
+        startActivity(i);
     }
 
     private void timer(){

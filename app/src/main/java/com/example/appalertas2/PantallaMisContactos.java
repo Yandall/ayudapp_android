@@ -3,6 +3,7 @@ package com.example.appalertas2;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -25,6 +26,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import cache.Session;
+
 public class PantallaMisContactos extends AppCompatActivity {
 
     ListView lvContactos;
@@ -42,6 +45,8 @@ public class PantallaMisContactos extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         if (b != null) {
             ID_USUARIO=b.getString("Id");
+            Log.d("OAAA",ID_USUARIO);
+
         }
 
         cargarContactos(ID_USUARIO);

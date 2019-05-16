@@ -30,23 +30,32 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import cache.Session;
+
 public class PantallaEmergenciaPrincipal extends AppCompatActivity {
-    ImageButton btnEmergenciaPrincipal, btnMiPerfilPrincipal, btnMisContactos;
+    ImageButton btnEmergenciaPrincipal, btnMiPerfilPrincipal, btnMisContactos, btnCerrarSesion;
     static String telefono_contacto;
     String ID_USUARIO;
-
+    Session sesion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla_emergencia_principal);
         conectar();
-
         Bundle b = getIntent().getExtras();
+        sesion = new Session(this);
+
         if (b != null){
             ID_USUARIO = b.getString("Id");
         }
-
+        btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sesion.saveSessionIdCache(null);
+                startActivity(new Intent(getApplicationContext(), PantallaInicial1.class));
+            }
+        });
         btnMisContactos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,7 +155,7 @@ public class PantallaEmergenciaPrincipal extends AppCompatActivity {
         btnMiPerfilPrincipal = findViewById(R.id.btnMiPerfilPrincipal);
         btnEmergenciaPrincipal = findViewById(R.id.btnEmergenciaPrincipal);
         btnMisContactos = (ImageButton)findViewById(R.id.btnMisContactosPrincipal);
-
+        btnCerrarSesion =(ImageButton)findViewById(R.id.imageButtonCerrarSesion);
     }
 
 }
