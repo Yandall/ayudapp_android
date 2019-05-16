@@ -83,9 +83,9 @@
 
     <ImageButton
         android:id="@+id/imageButtonCerrarSesion"
-        android:layout_width="50dp"
+        android:layout_width="100dp"
         android:layout_height="50dp"
-        app:srcCompat="@drawable/btnCerrar"
+        app:srcCompat="@drawable/exitsesion"
         android:layout_below="@+id/btnEmergenciaPrincipal"/>
     <TextView
         android:layout_width="wrap_content"

@@ -40,7 +40,7 @@ import java.util.TimerTask;
 
 
 public class PantallaRegistrar1 extends AppCompatActivity implements View.OnClickListener{
-    ImageButton btnRegistrarGuardar, btnIngresarRegistro;
+    Button  btnRegistrar, btnIngresarRegistro;
     EditText txtNombres,txtApellidos, txtNumeroDocumento, txtEmail, txtContraseña, txtTelefonoCelular, txtTelefonoFijo,
             txtDireccionResidencia;
     TextView txtFechaNacimiento;
@@ -51,10 +51,11 @@ public class PantallaRegistrar1 extends AppCompatActivity implements View.OnClic
     ArrayList<String> listaTipoSangre = new ArrayList<>();
     ArrayList<String> listaTipoDocumento = new ArrayList<>();
     Integer dia,mes,ano;
+    static boolean valido = false ;
     static String fechaNacimiento;
     static String idEPS;
     static String validarEmail ;
-    static boolean valido = false ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,16 +71,16 @@ public class PantallaRegistrar1 extends AppCompatActivity implements View.OnClic
 
 
 
-        btnRegistrarGuardar.setOnClickListener(new View.OnClickListener() {
+        btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(!txtNombres.getText().toString().equals("") || !txtEmail.getText().toString().equals("") || !txtContraseña.getText().toString().equals("") ||
-                        !txtNumeroDocumento.getText().toString().equals("") || !txtApellidos.getText().toString().equals("") || !txtTelefonoCelular.getText().toString().equals("")  ){
+                        !txtNumeroDocumento.getText().toString().equals("") || !txtApellidos.getText().toString().equals("") ||
+                        !txtTelefonoCelular.getText().toString().equals("")  ){
 
                     if(validarEmail.equals("102")) {
                         seleccionarIdEPS(spnEPS.getSelectedItem().toString());
-
                         registrarUsuario(String.valueOf(spnTipoSangre.getSelectedItemId() + 1), idEPS,
                                 String.valueOf(spnTipoDocumento.getSelectedItemId() + 1), txtNumeroDocumento.getText().toString(),
                                 txtNombres.getText().toString(), txtApellidos.getText().toString(), txtTelefonoFijo.getText().toString(),
@@ -87,12 +88,14 @@ public class PantallaRegistrar1 extends AppCompatActivity implements View.OnClic
                                 txtContraseña.getText().toString(), fechaNacimiento);
 
                         Toast.makeText(getApplicationContext(), "Registro Exitoso!", Toast.LENGTH_LONG).show();
-                        Intent i = new Intent(getApplicationContext(), PantallaEmergenciaPrincipal.class);
+                        Intent i = new Intent(getApplicationContext(), PantallaInicial2.class);
                         startActivity(i);
                         valido=true;
+
                     }else {
                         Toast.makeText(getApplicationContext(), "El EMAIL ya ha sido registrado", Toast.LENGTH_LONG).show();
                     }
+
                 }else
                 {
                     Toast.makeText(getApplicationContext(), "Favor llenar los campos obligatorios", Toast.LENGTH_LONG).show();
@@ -125,7 +128,7 @@ public class PantallaRegistrar1 extends AppCompatActivity implements View.OnClic
                                           buscarEmailRegistrado(txtEmail.getText().toString());
                                       }
                                   },
-                1000, 2000);   // 1000 Millisecond  = 1 second
+                7000, 1000);   // 1000 Millisecond  = 1 second
         if(valido){
             timer.cancel();
         }
@@ -343,7 +346,7 @@ public class PantallaRegistrar1 extends AppCompatActivity implements View.OnClic
         spnTipoSangre.setAdapter(adapter);
     }
     private void conectar(){
-        btnRegistrarGuardar = findViewById(R.id.btnRegistrarGuardar);
+        btnRegistrar = findViewById(R.id.btnRegistrarGuardar);
         btnIngresarRegistro = findViewById(R.id.btnIngresarRegistro);
         txtFechaNacimiento = findViewById(R.id.etFechaNacimiento);
         txtNombres = findViewById(R.id.etNombres);
